@@ -1,11 +1,13 @@
 ------------------------------ MODULE washlet ------------------------------
-CONSTANTS READY, WASHING, MASSAGE
+CONSTANTS READY \* 待機中
+        , WASHING \* 洗浄中
+        , MASSAGE \* マッサージ中
 
-VARIABLES state
+VARIABLES state \* 状態を表す変数
 
-Init == state = READY
+Init == state = READY \* 初期状態は待機中
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 13:19:08 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 13:21:30 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
