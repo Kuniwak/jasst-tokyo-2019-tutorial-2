@@ -25,12 +25,13 @@ PressWash ==
         /\ UNCHANGED strength \* 水圧は維持
 
 PressStop ==
-        /\ state = WASHING \* 洗浄中のときに
+        /\ state = WASHING \* 洗浄中のとき
+            \/ state = MASSAGE \* あるいはマッサージ中のとき
         /\ state' = READY \* 待機状態に遷移する
         /\ UNCHANGED strength \* 水圧は維持
 
-increment(x) == IF x < 4 THEN x + 1 ELSE 4 \* 水圧を1つ上げる
-decrement(x) == IF x > 0 THEN x - 1 ELSE 0 \* 水圧を1つ下げる
+increment(x) == IF x =< 2 THEN x + 2 ELSE x \* 水圧を1つ上げる
+decrement(x) == IF x >= 2 THEN x - 2 ELSE x \* 水圧を1つ下げる
 
 PressPlus ==
         /\ state = WASHING \* 洗浄中のとき
@@ -42,15 +43,21 @@ PressMinus ==
         /\ strength' = decrement(strength) \* 水圧は弱くなる
         /\ UNCHANGED state \* 状態を維持する
 
+PressMassage ==
+        /\ state = WASHING \* 洗浄中のときに
+        /\ state' = MASSAGE \* マッサージ中に遷移する
+        /\ IF strength =< 2 THEN strength' = 1 ELSE strength' = 3 \* 水圧が中以下なら、弱→中の繰り返し、水圧が中より上なら強→の繰り返しにする
+
 Next ==
         \/ PressWash \* 待機中 -> 洗浄中
         \/ PressStop \* 洗浄中 -> 待機中
         \/ PressPlus \* 洗浄中 -> 洗浄中/水圧強
         \/ PressMinus \* 洗浄中 -> 洗浄中/水圧弱
+        \/ PressMassage \* 洗浄中 -> マッサージ中
 
 Spec == Init /\ [][Next]_vars \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 14:48:15 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 15:23:36 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
