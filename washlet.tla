@@ -21,12 +21,14 @@ Init ==
 
 PressWash ==
         /\ state = READY \* 待機状態のときに
+            \/ state = WASHING
         /\ state' = WASHING \* 洗浄中に遷移する
         /\ UNCHANGED strength \* 水圧は維持
 
 PressStop ==
         /\ state = WASHING \* 洗浄中のとき
             \/ state = MASSAGE \* あるいはマッサージ中のとき
+            \/ state = READY
         /\ state' = READY \* 待機状態に遷移する
         /\ UNCHANGED strength \* 水圧は維持
 
@@ -59,5 +61,5 @@ Spec == Init /\ [][Next]_vars \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 15:23:36 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 15:29:07 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
