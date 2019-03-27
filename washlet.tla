@@ -12,16 +12,16 @@ PressWash ==
         /\ state' = WASHING \* 洗浄中に遷移する
 
 PressStop ==
-        /\ state = WASHING
-        /\ state' = READY
+        /\ state = WASHING \* 洗浄中のときに
+        /\ state' = READY \* 待機状態に遷移する
 
 Next == 
-        \/ PressWash
-        \/ PressStop
+        \/ PressWash \* 待機中 -> 洗浄中
+        \/ PressStop \* 洗浄中 -> 待機中
 
 Spec == Init /\ [][Next]_<<state>> \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 13:51:45 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 13:54:58 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
