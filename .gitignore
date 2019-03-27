@@ -1,1 +1,4 @@
 *.tex
+*.out
+*_Snapshot_*
+*.toolbox/**/*.tla
