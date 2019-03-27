@@ -11,9 +11,11 @@ PressWash ==
         /\ state = READY \* 待機状態のときに
         /\ state' = WASHING \* 洗浄中に遷移する
 
-Spec == Init \* システムの取りうる振る舞い
+Next == PressWash
+
+Spec == Init /\ [][Next]_<<state>> \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 13:38:55 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 13:43:27 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
