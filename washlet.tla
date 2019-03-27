@@ -15,11 +15,13 @@ PressStop ==
         /\ state = WASHING
         /\ state' = READY
 
-Next == PressWash \/ PressStop
+Next == 
+        \/ PressWash
+        \/ PressStop
 
 Spec == Init /\ [][Next]_<<state>> \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 13:50:44 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 13:51:45 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
