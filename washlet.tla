@@ -30,7 +30,7 @@ PressStop ==
             \/ state = MASSAGE \* あるいはマッサージ中のとき
             \/ state = READY
         /\ state' = READY \* 待機状態に遷移する
-        /\ UNCHANGED strength \* 水圧は維持
+        /\ strength' = 0 \* 水圧は維持
 
 increment(x) == IF x =< 2 THEN x + 2 ELSE x \* 水圧を1つ上げる
 decrement(x) == IF x >= 2 THEN x - 2 ELSE x \* 水圧を1つ下げる
@@ -61,5 +61,5 @@ Spec == Init /\ [][Next]_vars \* システムの取りうる振る舞い
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 15:29:07 JST 2019 by yuki.kokubun
+\* Last modified Wed Mar 27 15:30:28 JST 2019 by yuki.kokubun
 \* Created Wed Mar 27 13:06:52 JST 2019 by yuki.kokubun
