@@ -50,3 +50,9 @@ ProductVersion: 10.14.3
 BuildVersion:   18D109
 ```
 </details>
+
+
+
+### 有用な資料
+
+- [TLA+ Summary](https://lamport.azurewebsites.net/tla/summary.pdf)
